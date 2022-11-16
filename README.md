@@ -1,5 +1,5 @@
-# diffusion-certification
-This is the code for dissusion certification.
+# DensePure
+This is the code for DensePure.
 
 # run script example
 ```
