@@ -1,7 +1,7 @@
 # DensePure
 This is the code for DensePure.
 
-# run script example
+# Run Script Example
 ```
 CUDA_VISIBLE_DEVICES=0 python eval_certified_densepure.py \
 --exp exp \
