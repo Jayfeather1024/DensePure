@@ -2,8 +2,7 @@
 This is the code for dissusion certification.
 
 # run script example
-'''
-
+```
 CUDA_VISIBLE_DEVICES=0 python eval_certified_densepure.py \
 --exp exp \
 --config cifar10.yml \
@@ -27,5 +26,4 @@ CUDA_VISIBLE_DEVICES=0 python eval_certified_densepure.py \
 --save_predictions \
 --predictions_path exp/0.50- \
 --reverse_seed 0
-
-'''
+```
