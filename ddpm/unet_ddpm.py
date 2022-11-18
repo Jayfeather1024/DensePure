@@ -1,11 +1,3 @@
-# ---------------------------------------------------------------
-# Taken from the following link as is from:
-# https://github.com/ermongroup/SDEdit/blob/main/models/diffusion.py
-#
-# The license for the original version of this file can be
-# found in this directory (LICENSE_UNET_DDPM).
-# ---------------------------------------------------------------
-
 import math
 import torch
 import torch.nn as nn

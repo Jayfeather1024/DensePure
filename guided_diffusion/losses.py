@@ -1,17 +1,3 @@
-# ---------------------------------------------------------------
-# Taken from the following link as is from:
-# https://github.com/openai/guided-diffusion/blob/main/guided_diffusion/losses.py
-#
-# The license for the original version of this file can be
-# found in this directory (LICENSE_GUIDED_DIFFUSION).
-# ---------------------------------------------------------------
-
-"""
-Helpers for various likelihood-based losses. These are ported from the original
-Ho et al. diffusion models codebase:
-https://github.com/hojonathanho/diffusion/blob/1e0dceb3b3495bbe19116a5e1b3596cd0706c543/diffusion_tf/utils.py
-"""
-
 import numpy as np
 
 import torch as th

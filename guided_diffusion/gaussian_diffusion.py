@@ -1,18 +1,3 @@
-# ---------------------------------------------------------------
-# Taken from the following link as is from:
-# https://github.com/openai/guided-diffusion/blob/main/guided_diffusion/gaussian_diffusion.py
-#
-# The license for the original version of this file can be
-# found in this directory (LICENSE_GUIDED_DIFFUSION).
-# ---------------------------------------------------------------
-
-"""
-This code started out as a PyTorch port of Ho et al's diffusion models:
-https://github.com/hojonathanho/diffusion/blob/1e0dceb3b3495bbe19116a5e1b3596cd0706c543/diffusion_tf/diffusion_utils_2.py
-
-Docstrings have been added, as well as DDIM sampling and a new collection of beta schedules.
-"""
-
 import enum
 import math
 

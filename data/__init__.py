@@ -1,10 +1,3 @@
-# ---------------------------------------------------------------
-# Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
-#
-# This work is licensed under the NVIDIA Source Code License
-# for DiffPure. To view a copy of this license, see the LICENSE file.
-# ---------------------------------------------------------------
-
 from .datasets import imagenet_lmdb_dataset, imagenet_lmdb_dataset_sub, cifar10_dataset_sub
 
 def get_transform(dataset_name, transform_type, base_size=256):

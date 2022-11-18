@@ -1,11 +1,3 @@
-# ---------------------------------------------------------------
-# Taken from the following link as is from:
-# https://github.com/openai/guided-diffusion/blob/main/guided_diffusion/train_util.py
-#
-# The license for the original version of this file can be
-# found in this directory (LICENSE_GUIDED_DIFFUSION).
-# ---------------------------------------------------------------
-
 import copy
 import functools
 import os

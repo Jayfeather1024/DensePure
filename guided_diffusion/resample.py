@@ -1,11 +1,3 @@
-# ---------------------------------------------------------------
-# Taken from the following link as is from:
-# https://github.com/openai/guided-diffusion/blob/main/guided_diffusion/resample.py
-#
-# The license for the original version of this file can be
-# found in this directory (LICENSE_GUIDED_DIFFUSION).
-# ---------------------------------------------------------------
-
 from abc import ABC, abstractmethod
 
 import numpy as np

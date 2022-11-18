@@ -11,10 +11,6 @@ from torchvision.datasets.utils import check_integrity
 from typing import *
 from zipdata import ZipData
 
-
-# set this environment variable to the location of your imagenet directory if you want to read ImageNet data.
-# make sure your val directory is preprocessed to look like the train directory, e.g. by running this script
-# https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh
 IMAGENET_LOC_ENV = "IMAGENET_DIR"
 IMAGENET_ON_PHILLY_DIR = "imagenet/2012/"
 
@@ -197,7 +193,6 @@ class InputCenterLayer(torch.nn.Module):
         return input - means
 
 
-# from https://github.com/hendrycks/pre-training
 class ImageNetDS(Dataset):
     """`Downsampled ImageNet <https://patrykchrabaszcz.github.io/Imagenet32/>`_ Datasets.
 
@@ -311,8 +306,6 @@ class ImageNetDS(Dataset):
         return True
 
 
-## To use this dataset, please contact the authors of https://arxiv.org/pdf/1905.13736.pdf
-# to get access to this pickle file (ti_top_50000_pred_v3.1.pickle) containing the dataset.
 class TiTop50KDataset(Dataset):
             """500K images closest to the CIFAR-10 dataset from 
                the 80 Millon Tiny Images Datasets"""
