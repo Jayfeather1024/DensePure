@@ -21,7 +21,7 @@ Abstract: *Diffusion models have been recently employed to improve certified rob
     pip install -r requirements.txt
     ```
 
-## Datasets, pre-trained diffusion models and classifiers
+## Datasets, Pre-trained Diffusion Models and Classifiers
 Before running our code, you need to first prepare two datasets CIFAR-10 and ImageNet. CIFAR-10 will be downloaded automatically.
 For ImageNet, you need to download validation images of ILSVRC2012 from https://www.image-net.org/. And the images need to be preprocessed by running the scripts `valprep.sh` from https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh
 under validation directory.  
@@ -58,8 +58,11 @@ bash densepure_cifar10.sh [sigma] [steps] [reverse_seed] # For CIFAR-10
 bash densepure_imagenet.sh [sigma] [steps] [reverse_seed] # For ImageNet
 ```
 
-Note: `sigma` is the noise level of randomized smoothing. `steps` is the parameter for fast sampling steps in Section 5.2 and it must be larger than one and smaller than the total reverse steps. `reverse_seed` is a parameter which control majority vote process in Section 5.2. For example, you need to run `densepure_cifar10.sh` 10 times with 10 different `reverse_seed` to finish 10 majority vote numbers experiments. After running above scripts under one `reverse_seed`, you will gain a `.npy` file that contains labels of 100000 (for CIFAR-10) randomized smoothing sampling times. If you want to obtain the final results of 10 majority vote numbers, you need to run the following scripts in results:
+Note: `sigma` is the noise level of randomized smoothing. `steps` is the parameter for fast sampling steps in Section 5.2 and it must be larger than one and smaller than the total reverse steps. `reverse_seed` is a parameter which control majority vote process in Section 5.2. For example, you need to run `densepure_cifar10.sh` 10 times with 10 different `reverse_seed` to finish 10 majority vote numbers experiments. After running above scripts under one `reverse_seed`, you will gain a `.npy` file that contains labels of 100000 (for CIFAR-10) randomized smoothing sampling times. If you want to obtain the final results of 10 majority vote numbers, you need to run the following scripts in `results` directory:
 ```
+cd results
+bash merge_cifar10.sh [sigma] [steps] [majority_vote_numbers] # For CIFAR-10
+bash merge_imagenet.sh [sigma] [steps] [majority_vote_numbers] # For ImageNet
 ```
 
 ## License
