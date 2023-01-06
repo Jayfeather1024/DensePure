@@ -382,7 +382,7 @@ def purified_certify(model, dataset, args, config):
 
 
 def robustness_eval(args, config):
-    log_dir = os.path.join(args.image_folder, 'seed' + str(args.seed), 'data' + str(args.data_seed))
+    log_dir = os.path.join(args.image_folder, 'seed' + str(args.seed))
     os.makedirs(log_dir, exist_ok=True)
     args.log_dir = log_dir
     logger = utils.Logger(file_name=f'{log_dir}/log.txt', file_mode="w+", should_flush=True)
@@ -415,9 +415,6 @@ def robustness_eval(args, config):
 
 def parse_args_and_config():
     parser = argparse.ArgumentParser(description=globals()['__doc__'])
-
-    # dataset
-    parser.add_argument('--data_seed', type=int, default=0, help='Random seed')
 
     # diffusion models
     parser.add_argument('--config', type=str, required=True, help='Path to the config file')
@@ -457,6 +454,8 @@ def parse_args_and_config():
     parser.add_argument('--t_plus', type=int, default=0, help='perturbation of t')
     parser.add_argument('--t_total', type=int, default=4000, help='total t to reduce reverse t')
     parser.add_argument('--save_info', action='store_true', help='whether to save image logits')
+
+    # beta version param
     parser.add_argument('--use_clustering', action='store_true', help='whether to use clustering when purifying')
     parser.add_argument('--clustering_batch', type=int, default=100)
     parser.add_argument("--clustering_method", type=str, default="none", help="classifier")

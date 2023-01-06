@@ -39,13 +39,17 @@ Please place all the pretrained models in the `pretrained` directory.
 For the pre-trained classifiers, they will be automatically downloaded by `timm` or `transformers`.  If you want to use your own
 classifiers, code need to be changed in `eval_certified_densepure.py`.
 
-## Run Experiments about Carlini 2022
+## Run Experiments of Carlini 2022
+We provide our own code implementation for the paper [(Certified!!) Adversarial Robustness for Free!](https://arxiv.org/abs/2206.10550) to compare with DensePure.  
 
+To gain the results in Table 1 about Carlini22, please run the following scripts using different noise levels `sigma`: 
+```
+cd run_scripts
+bash carlini22_cifar10.sh [sigma] # For CIFAR-10
+bash carlini22_imagenet.sh [sigma]  # For ImageNet
+```
 
-
-
-
-## Run Experiments about DensePure
+## Run Experiments of DensePure
 
 
 
