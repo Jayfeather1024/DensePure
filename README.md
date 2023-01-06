@@ -1,7 +1,7 @@
 # DensePure: Understanding Diffusion Models towards Adversarial Robustness
 
 <p align="center">
-  <img width="1258" height="389" src="./pictures/densepure_flowchart.png">
+  <img width="1200" height="300" src="./pictures/densepure_flowchart.png">
 </p>
 
 Official PyTorch implementation of the paper:<br>
