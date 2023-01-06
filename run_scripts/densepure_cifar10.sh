@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 cd ..
 
-reverse_seed=$s1
-sigma=$2
-steps=$3
+sigma=$1
+steps=$2
+reverse_seed=$3
 
 python eval_certified_densepure.py \
 --exp exp \
