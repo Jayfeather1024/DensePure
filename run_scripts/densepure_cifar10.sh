@@ -1,27 +1,29 @@
 #!/usr/bin/env bash
 cd ..
 
-seed=$s1
+reverse_seed=$s1
+sigma=$2
+steps=$3
 
 python eval_certified_densepure.py \
 --exp exp \
 --config cifar10.yml \
--i cifar10-densepure-sample_num_100000-noise_0.25-2steps_$sample_id-$seed \
+-i cifar10-densepure-sample_num_100000-noise_$sigma-$steps-$reverse_seed \
 --domain cifar10 \
 --seed 0 \
 --diffusion_type ddpm \
 --lp_norm L2 \
---outfile results/cifar10-certify_diffse-ddpm-noise_0.50-sample_100000-2steps_$sample_id-$seed \
---sigma 0.25 \
+--outfile results/cifar10-densepure-sample_num_100000-noise_$sigma-$steps-steps-$reverse_seed \
+--sigma $sigma \
 --N 100000 \
 --N0 100 \
 --certified_batch 100 \
---sample_id 0 \
+--sample_id $(seq -s ' ' 0 20 9980) \
 --use_id \
 --certify_mode purify \
 --advanced_classifier vit \
 --use_t_steps \
---num_t_steps 2 \
+--num_t_steps $steps \
 --save_predictions \
---predictions_path exp/0.25- \
---reverse_seed $seed
+--predictions_path exp/cifar10/$sigma- \
+--reverse_seed $reverse_seed
