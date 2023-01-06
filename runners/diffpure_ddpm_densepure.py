@@ -72,7 +72,7 @@ class Diffusion(torch.nn.Module):
         defaults = model_and_diffusion_defaults(self.args.t_total)
         model, diffusion = create_model_and_diffusion(**defaults)
         model.load_state_dict(
-            dist_util.load_state_dict("pretrained/ddpm/cifar10_uncond_50M_500K.pt", map_location="cpu")
+            dist_util.load_state_dict("pretrained/cifar10_uncond_50M_500K.pt", map_location="cpu")
         )
         model.to(self.device)
         model.eval()

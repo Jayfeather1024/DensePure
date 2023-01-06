@@ -10,7 +10,7 @@ import numpy as np
 
 
 class GuidedDiffusion(torch.nn.Module):
-    def __init__(self, args, config, device=None, model_dir='pretrained/guided_diffusion'):
+    def __init__(self, args, config, device=None, model_dir='pretrained'):
         super().__init__()
         self.args = args
         self.config = config

@@ -25,7 +25,7 @@ from networks import *
 IMAGENET_DEFAULT_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_DEFAULT_STD = (0.229, 0.224, 0.225)
 
-class SDE_Adv_Model_certified_clustering(nn.Module):
+class DensePure_Certify(nn.Module):
     def __init__(self, args, config):
         super().__init__()
         self.args = args
@@ -41,7 +41,7 @@ class SDE_Adv_Model_certified_clustering(nn.Module):
                 self.classifier = checkpoint['net'].cuda()
                 self.classifier.training = False
             else:
-                self.classifier = get_image_classifier_certified('../models/cifar10/resnet110/noise_'+args.classifier_sigma+'/checkpoint.pth.tar', args.domain).to(config.device)
+                raise NotImplementedError('no classifier')
         elif args.domain == 'imagenet':
             if args.advanced_classifier=='beit':
                 self.classifier = timm.create_model('beit_large_patch16_512', checkpoint_path='pretrained/beit_large_patch16_512_pt22k_ft22kto1k.pth').cuda()
@@ -56,7 +56,7 @@ class SDE_Adv_Model_certified_clustering(nn.Module):
                 self.classifier = timm.create_model('resnet152', pretrained=True).cuda()
                 self.classifier.eval()
             else:
-                self.classifier = get_image_classifier_certified('../models/imagenet/resnet50/noise_'+args.classifier_sigma+'/checkpoint.pth.tar', args.domain).to(config.device)
+                raise NotImplementedError('no classifier')
         else:
             raise NotImplementedError('no classifier')        
 
@@ -179,8 +179,10 @@ class Certify_Model(nn.Module):
                 checkpoint = torch.load('../wide-resnet.pytorch/checkpoint/cifar10/wide-resnet-28x10.t7')
                 self.classifier = checkpoint['net'].cuda()
                 self.classifier.training = False
+            elif args.advanced_classifier=='rs':
+                self.classifier = get_image_classifier_certified('models/cifar10/resnet110/noise_'+args.classifier_sigma+'/checkpoint.pth.tar', args.domain).to(config.device)
             else:
-                self.classifier = get_image_classifier_certified('../models/cifar10/resnet110/noise_'+args.classifier_sigma+'/checkpoint.pth.tar', args.domain).to(config.device)
+                raise NotImplementedError('no classifier')
         elif args.domain == 'imagenet':
             if args.advanced_classifier=='beit':
                 self.classifier = timm.create_model('beit_large_patch16_512', checkpoint_path='pretrained/beit_large_patch16_512_pt22k_ft22kto1k.pth').cuda()
@@ -194,8 +196,10 @@ class Certify_Model(nn.Module):
             elif args.advanced_classifier=='resnet':
                 self.classifier = timm.create_model('resnet152', pretrained=True).cuda()
                 self.classifier.eval()
-            else:
+            elif args.advanced_classifier=='rs':
                 self.classifier = get_image_classifier_certified('../models/imagenet/resnet50/noise_'+args.classifier_sigma+'/checkpoint.pth.tar', args.domain).to(config.device)
+            else:
+                raise NotImplementedError('no classifier')
         else:
             raise NotImplementedError('no classifier')
 
@@ -387,7 +391,7 @@ def robustness_eval(args, config):
 
     # load model
     print('starting the model and loader...')
-    model = SDE_Adv_Model_certified_clustering(args, config)
+    model = DensePure_Certify(args, config)
     if ngpus > 1:
         model = torch.nn.DataParallel(model)
     model = model.eval().to(config.device)

@@ -11,8 +11,7 @@ from torchvision.datasets.utils import check_integrity
 from typing import *
 from zipdata import ZipData
 
-IMAGENET_LOC_ENV = "IMAGENET_DIR"
-IMAGENET_ON_PHILLY_DIR = "imagenet/2012/"
+IMAGENET_DIR = "/home/datasets/imagenet"
 
 # list of all datasets
 DATASETS = ["imagenet", "imagenet32", "cifar10"]
@@ -21,10 +20,7 @@ DATASETS = ["imagenet", "imagenet32", "cifar10"]
 def get_dataset(dataset: str, split: str) -> Dataset:
     """Return the dataset as a PyTorch Dataset object"""
     if dataset == "imagenet":
-        if "PT_DATA_DIR" in os.environ: #running on Philly
-            return _imagenet_on_philly(split)
-        else:
-            return _imagenet(split)
+        return _imagenet(split)
 
     elif dataset == "imagenet32":
         return _imagenet32(split)
@@ -84,33 +80,11 @@ def _cifar10(split: str) -> Dataset:
     else:
         raise Exception("Unknown split name.")
 
-def _imagenet_on_philly(split: str) -> Dataset:
-        
-        trainpath = os.path.join(IMAGENET_ON_PHILLY_DIR, 'train.zip')
-        train_map = os.path.join(IMAGENET_ON_PHILLY_DIR, 'train_map.txt')
-        valpath = os.path.join(IMAGENET_ON_PHILLY_DIR, 'val.zip')
-        val_map = os.path.join(IMAGENET_ON_PHILLY_DIR, 'val_map.txt')
-
-        if split == "train":
-            return ZipData(trainpath, train_map,
-                            transforms.Compose([
-                            transforms.RandomResizedCrop(224),
-                            transforms.RandomHorizontalFlip(),
-                            transforms.ToTensor(),
-                            ]))
-        elif split == "test":
-            return ZipData(valpath, val_map, 
-                            transforms.Compose([
-                            transforms.Resize(256),
-                            transforms.CenterCrop(224),
-                            transforms.ToTensor(),
-                            ]))
-
 def _imagenet(split: str) -> Dataset:
     # if not IMAGENET_LOC_ENV in os.environ:
     #     raise RuntimeError("environment variable for ImageNet directory not set")
 
-    dir = "/home/datasets/imagenet"
+    dir = IMAGENET_DIR
     if split == "train":
         subdir = os.path.join(dir, "train")
         transform = transforms.Compose([
