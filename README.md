@@ -34,10 +34,11 @@ For the pre-trained diffusion models, you need to first download them from the f
 - [Guided Diffusion](https://github.com/openai/guided-diffusion) for
   ImageNet: (`256x256 diffusion unconditional`: [download link](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/256x256_diffusion_uncond.pt))
 
-Please place all the pretrained models in the `pretrained` directory.  
+For the pre-trained classifiers, ViT-B/16 model on CIFAR-10 will be automatically downloaded by `transformers`.  For ImageNet BEiT large model, you need to dwonload from the following links:
+- [BEiT](https://github.com/microsoft/unilm/tree/master/beit) for
+  ImageNet: (`beit_large_patch16_512_pt22k_ft22kto1k.pth`: [download link](https://conversationhub.blob.core.windows.net/beit-share-public/beit/beit_large_patch16_512_pt22k_ft22kto1k.pth))
 
-For the pre-trained classifiers, they will be automatically downloaded by `timm` or `transformers`.  If you want to use your own
-classifiers, code need to be changed in `eval_certified_densepure.py`.
+Please place all the pretrained models in the `pretrained` directory. If you want to use your own classifiers, code need to be changed in `eval_certified_densepure.py`.
 
 ## Run Experiments of Carlini 2022
 We provide our own code implementation for the paper [(Certified!!) Adversarial Robustness for Free!](https://arxiv.org/abs/2206.10550) to compare with DensePure.  
@@ -50,8 +51,16 @@ bash carlini22_imagenet.sh [sigma]  # For ImageNet
 ```
 
 ## Run Experiments of DensePure
+To get certified accuracy under DensePure, please run the following scripts:
+```
+cd run_scripts
+bash densepure_cifar10.sh [sigma] [steps] [reverse_seed] # For CIFAR-10
+bash densepure_imagenet.sh [sigma] [steps] [reverse_seed] # For ImageNet
+```
 
-
+Note: `sigma` is the noise level of randomized smoothing. `steps` is the parameter for fast sampling steps in Section 5.2 and it must be larger than one and smaller than the total reverse steps. `reverse_seed` is a parameter which control majority vote process in Section 5.2. For example, you need to run `densepure_cifar10.sh` 10 times with 10 different `reverse_seed` to finish 10 majority vote numbers experiments. After running above scripts under one `reverse_seed`, you will gain a `.npy` file that contains labels of 100000 (for CIFAR-10) randomized smoothing sampling times. If you want to obtain the final results of 10 majority vote numbers, you need to run the following scripts in results:
+```
+```
 
 ## License
 
@@ -75,31 +84,3 @@ Please cite our paper and Carlini et al. (2022), if you happen to use this codeb
   year={2022}
 }
 ```
-
-
-# run script example
-'''
-python eval_certified_densepure.py \
---exp exp \
---config cifar10.yml \
--i cifar10-certify_diffuse-ddpm-sample_num_100000-noise_0.50-2steps_$sample_id-$seed \
---domain cifar10 \
---seed 0 \
---data_seed 0 \
---diffusion_type ddpm \
---lp_norm L2 \
---outfile results/cifar10-certify_diffse-ddpm-noise_0.50-sample_100000-2steps_$sample_id-$seed \
---sigma 0.25 \
---N 100000 \
---N0 100 \
---certified_batch 100 \
---sample_id 0 \
---use_id \
---certify_mode purify \
---advanced_classifier vit \
---use_t_steps \
---num_t_steps 2 \
---save_predictions \
---predictions_path exp/0.50- \
---reverse_seed 0
-'''
