@@ -65,9 +65,6 @@ bash merge_cifar10.sh [sigma] [steps] [majority_vote_numbers] # For CIFAR-10
 bash merge_imagenet.sh [sigma] [steps] [majority_vote_numbers] # For ImageNet
 ```
 
-## License
-
-
 ## Citation
 Please cite our paper and Carlini et al. (2022), if you happen to use this codebase:
 ```
