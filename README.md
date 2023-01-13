@@ -15,7 +15,11 @@ Abstract: *Diffusion models have been recently employed to improve certified rob
 ## Requirements
 
 - Python 3.8.5
-- CUDA=11.1, PyTorch=1.8.0
+- CUDA=11.1 
+- Installation of PyTorch 1.8.0:
+    ```bash
+    conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+    ```
 - Installation of required packages:
     ```bash
     pip install -r requirements.txt
