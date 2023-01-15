@@ -6,7 +6,7 @@ steps=$2
 reverse_seed=$3
 
 python eval_certified_densepure.py \
---exp exp \
+--exp exp/imagenet \
 --config imagenet.yml \
 -i imagenet-densepure-sample_num_10000-noise_$sigma-$steps-$reverse_seed \
 --domain imagenet \

@@ -5,7 +5,7 @@ from statsmodels.stats.proportion import proportion_confint
 from scipy.stats import norm
 
 def gain_results(args):
-    file_merge = open(args.datasets+'_'+args.sigma+'_'+args.results_file, 'w')
+    file_merge = open(str(args.datasets)+'_'+str(args.sigma)+'_'+str(args.results_file), 'w')
     file_merge.write("idx\tlabel\tpredict\tradius\tcorrect\n")
     for sample_id in range(args.sample_num):
 

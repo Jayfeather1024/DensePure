@@ -6,7 +6,7 @@ steps=$2
 reverse_seed=$3
 
 python eval_certified_densepure.py \
---exp exp \
+--exp exp/cifar10 \
 --config cifar10.yml \
 -i cifar10-densepure-sample_num_100000-noise_$sigma-$steps-$reverse_seed \
 --domain cifar10 \
